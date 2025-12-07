@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Retro Library - Demo de Características</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Tahoma:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .demo-section {
+            background: #f5f5f5;
+            border: 1px solid #D1CFC4;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 3px;
+        }
+        .demo-section h2 {
+            color: #003399;
+            font-size: 16px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #6BA8FF;
+            padding-bottom: 5px;
+        }
+        .demo-button {
+            margin: 5px;
+        }
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        .feature-list li {
+            padding: 8px;
+            margin: 5px 0;
+            background: white;
+            border-left: 3px solid #388E3C;
+            font-size: 12px;
+        }
+        .feature-list li::before {
+            content: "✓ ";
+            color: #388E3C;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: bold;
+            margin: 2px;
+        }
+        .badge.success { background: #388E3C; color: white; }
+        .badge.info { background: #1976D2; color: white; }
+        .badge.warning { background: #F57C00; color: white; }
+        .badge.error { background: #D32F2F; color: white; }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header class="xp-header">
+            <div class="title-bar">
+                <div class="title-bar-text">
+                    <img src="https://win98icons.alexmeub.com/icons/png/computer_explorer-0.png" alt="icon" class="window-icon">
+                    404 Retro Library - Demo
+                </div>
+                <div class="title-bar-controls">
+                    <button aria-label="Minimize"></button>
+                    <button aria-label="Maximize"></button>
+                    <button aria-label="Close"></button>
+                </div>
+            </div>
+            <div class="menu-bar">
+                <div class="menu-item">File</div>
+                <div class="menu-item">Edit</div>
+                <div class="menu-item">View</div>
+                <div class="menu-item">Help</div>
+            </div>
+            <div class="address-bar">
+                <span class="address-label">Address</span>
+                <div class="address-input-wrapper">
+                    <img src="https://win98icons.alexmeub.com/icons/png/internet_connection_wiz-0.png" class="address-icon" alt="ie">
+                    <input type="text" value="http://www.404-retro-library.com/demo.html" readonly>
+                </div>
+                <button class="go-button">Go</button>
+            </div>
+        </header>
+
+        <div class="main-body">
+            <aside class="sidebar">
+                <div class="sidebar-panel">
+                    <div class="panel-header">
+                        <span class="panel-title">Navegación</span>
+                        <button class="panel-toggle"></button>
+                    </div>
+                    <div class="panel-content">
+                        <a href="index.html" class="sidebar-link">
+                            <img src="https://win98icons.alexmeub.com/icons/png/computer_explorer-0.png" alt="">
+                            Inicio
+                        </a>
+                        <a href="category.html" class="sidebar-link">
+                            <img src="https://win98icons.alexmeub.com/icons/png/directory_open_file_mydocs-0.png" alt="">
+                            Categorías
+                        </a>
+                        <a href="submit.html" class="sidebar-link">
+                            <img src="https://win98icons.alexmeub.com/icons/png/floppy_drive_3_5-0.png" alt="">
+                            Enviar
+                        </a>
+                        <a href="demo.html" class="sidebar-link active">
+                            <img src="https://win98icons.alexmeub.com/icons/png/help_book_cool-0.png" alt="">
+                            Demo
+                        </a>
+                    </div>
+                </div>
+            </aside>
+
+            <main class="content-area">
+                <div class="demo-section">
+                    <h2>🎉 Bienvenido a la Demo Interactiva</h2>
+                    <p style="font-size: 12px; line-height: 1.6;">
+                        Esta página demuestra todas las características implementadas en la 404 Retro Library.
+                        Prueba cada función para ver cómo funciona.
+                    </p>
+                </div>
+
+                <div class="demo-section">
+                    <h2>✨ Características Implementadas</h2>
+                    <ul class="feature-list">
+                        <li>Sistema de búsqueda en tiempo real</li>
+                        <li>Favoritos con persistencia (localStorage)</li>
+                        <li>Soporte para PDF, Links, Descargas y Videos</li>
+                        <li>Reloj en tiempo real</li>
+                        <li>Formulario con validación completa</li>
+                        <li>Notificaciones estilo Windows XP</li>
+                        <li>Filtros de categoría funcionales</li>
+                        <li>Efectos de sonido</li>
+                        <li>Ventanas arrastrables</li>
+                        <li>Animaciones suaves</li>
+                        <li>Responsive design</li>
+                        <li>Configuración centralizada</li>
+                    </ul>
+                </div>
+
+                <div class="demo-section">
+                    <h2>🧪 Prueba las Funciones</h2>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;">
+                        <button class="xp-button demo-button" onclick="testNotification()">
+                            Mostrar Notificación
+                        </button>
+                        <button class="xp-button demo-button" onclick="testSound()">
+                            Reproducir Sonido
+                        </button>
+                        <button class="xp-button demo-button" onclick="testSave()">
+                            Probar Favoritos
+                        </button>
+                        <button class="xp-button demo-button" onclick="testSearch()">
+                            Probar Búsqueda
+                        </button>
+                        <button class="xp-button demo-button" onclick="clearStorage()">
+                            Limpiar LocalStorage
+                        </button>
+                    </div>
+                </div>
+
+                <div class="demo-section">
+                    <h2>📦 Tipos de Recursos Soportados</h2>
+                    <div style="margin-top: 10px;">
+                        <span class="badge error">PDF</span> - Documentos y guías en formato PDF
+                        <br><br>
+                        <span class="badge info">LINK</span> - Enlaces externos a sitios web
+                        <br><br>
+                        <span class="badge success">DOWNLOAD</span> - Archivos descargables
+                        <br><br>
+                        <span class="badge warning">VIDEO</span> - Videos y contenido multimedia
+                    </div>
+                </div>
+
+                <div class="demo-section">
+                    <h2>💻 Ejemplo de Código</h2>
+                    <p style="font-size: 12px; margin-bottom: 10px;">Así se agrega un nuevo recurso:</p>
+                    <div class="code-block">
+{
+    id: 1,
+    title: "Mi Recurso Increíble",
+    category: "Components",
+    description: "Una descripción detallada",
+    icon: "https://ejemplo.com/icono.png",
+    saves: 0,
+    type: "pdf",
+    url: "https://ejemplo.com/recurso.pdf",
+    tags: ["tutorial", "guía", "pdf"],
+    author: "Tu Nombre",
+    date: "2024-12-07"
+}
+                    </div>
+                </div>
+
+                <div class="demo-section">
+                    <h2>📊 Estadísticas del Proyecto</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-top: 10px;">
+                        <div style="background: white; padding: 15px; text-align: center; border-radius: 3px;">
+                            <div style="font-size: 24px; font-weight: bold; color: #003399;">4</div>
+                            <div style="font-size: 11px; color: #666;">Páginas HTML</div>
+                        </div>
+                        <div style="background: white; padding: 15px; text-align: center; border-radius: 3px;">
+                            <div style="font-size: 24px; font-weight: bold; color: #003399;">1500+</div>
+                            <div style="font-size: 11px; color: #666;">Líneas de Código</div>
+                        </div>
+                        <div style="background: white; padding: 15px; text-align: center; border-radius: 3px;">
+                            <div style="font-size: 24px; font-weight: bold; color: #003399;">20</div>
+                            <div style="font-size: 11px; color: #666;">Recursos de Ejemplo</div>
+                        </div>
+                        <div style="background: white; padding: 15px; text-align: center; border-radius: 3px;">
+                            <div style="font-size: 24px; font-weight: bold; color: #003399;">7</div>
+                            <div style="font-size: 11px; color: #666;">Categorías</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="demo-section">
+                    <h2>🚀 Próximos Pasos</h2>
+                    <ol style="font-size: 12px; line-height: 1.8; padding-left: 20px;">
+                        <li>Abre <code>resources-example.js</code> para ver 20 recursos reales</li>
+                        <li>Copia el contenido en <code>script.js</code> para usarlos</li>
+                        <li>Lee <code>README.md</code> para instrucciones detalladas</li>
+                        <li>Edita <code>config.js</code> para personalizar colores y mensajes</li>
+                        <li>Agrega tus propios recursos siguiendo el formato</li>
+                    </ol>
+                </div>
+
+                <div class="demo-section">
+                    <h2>📚 Documentación</h2>
+                    <div style="font-size: 12px; line-height: 1.6;">
+                        <p><strong>README.md</strong> - Guía completa de uso e instalación</p>
+                        <p><strong>CHANGELOG.md</strong> - Lista de todas las mejoras implementadas</p>
+                        <p><strong>config.js</strong> - Archivo de configuración centralizada</p>
+                        <p><strong>resources-example.js</strong> - 20 recursos reales de ejemplo</p>
+                    </div>
+                </div>
+
+                <div class="demo-section" style="background: #FFFFE1; border-color: #F2963D;">
+                    <h2>💡 Consejo</h2>
+                    <p style="font-size: 12px; line-height: 1.6;">
+                        <strong>¡Prueba todas las funciones!</strong> Haz clic en las tarjetas de recursos,
+                        usa la búsqueda, guarda favoritos, y explora las diferentes páginas.
+                        Todo está completamente funcional y listo para usar con datos reales.
+                    </p>
+                </div>
+            </main>
+        </div>
+
+        <footer class="xp-footer">
+            <div class="footer-start">
+                <button class="start-button">
+                    <img src="https://win98icons.alexmeub.com/icons/png/windows-0.png" alt="logo">
+                    Start
+                </button>
+            </div>
+            <div class="footer-taskbar">
+                <div class="task-item active">
+                    <img src="https://win98icons.alexmeub.com/icons/png/computer_explorer-0.png" alt="">
+                    404 Retro Library - Demo
+                </div>
+            </div>
+            <div class="footer-tray">
+                <img src="https://win98icons.alexmeub.com/icons/png/loudspeaker_rays-0.png" alt="sound">
+                <span class="time">12:00 PM</span>
+            </div>
+        </footer>
+    </div>
+
+    <audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-16.mp3" preload="auto"></audio>
+    <audio id="popupSound" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" preload="auto"></audio>
+
+    <script src="script.js"></script>
+    <script>
+        // Demo functions
+        function testNotification() {
+            showNotification('¡Esta es una notificación de prueba! 🎉');
+            playSound('popup');
+        }
+
+        function testSound() {
+            playSound('click');
+            setTimeout(() => playSound('popup'), 500);
+        }
+
+        function testSave() {
+            const saved = savedResources.length;
+            showNotification(`Tienes ${saved} recursos guardados en favoritos`);
+        }
+
+        function testSearch() {
+            window.location.href = 'index.html';
+        }
+
+        function clearStorage() {
+            if (confirm('¿Estás seguro de que quieres limpiar todos los favoritos guardados?')) {
+                localStorage.clear();
+                showNotification('LocalStorage limpiado correctamente');
+                playSound('popup');
+            }
+        }
+    </script>
+</body>
+</html>

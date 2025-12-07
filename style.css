@@ -653,3 +653,158 @@ body {
         transform: translateY(0);
     }
 }
+
+
+/* Notification Animations */
+@keyframes slideIn {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+}
+
+/* Active sidebar link */
+.sidebar-link.active {
+    background: rgba(255, 255, 255, 0.3);
+    border-left: 3px solid #003399;
+    padding-left: 5px;
+    font-weight: bold;
+}
+
+/* Form Improvements */
+form input:focus,
+form textarea:focus,
+form select:focus {
+    outline: 2px solid #6BA8FF;
+    border-color: #003399;
+}
+
+form input[type="file"] {
+    padding: 5px;
+    border: 1px solid #7F9DB9;
+    background: white;
+    width: 100%;
+}
+
+/* Saved button state */
+.xp-button.save-btn.saved {
+    background: linear-gradient(to bottom, #FFE88C 0%, #FFCC00 100%);
+    font-weight: bold;
+}
+
+/* Resource type badges */
+.resource-type-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 9px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-right: 5px;
+}
+
+.resource-type-badge.pdf {
+    background: #D32F2F;
+    color: white;
+}
+
+.resource-type-badge.link {
+    background: #1976D2;
+    color: white;
+}
+
+.resource-type-badge.download {
+    background: #388E3C;
+    color: white;
+}
+
+.resource-type-badge.video {
+    background: #7B1FA2;
+    color: white;
+}
+
+/* Hover effects for interactive elements */
+.menu-item,
+.sidebar-link,
+.task-item {
+    transition: all 0.2s ease;
+}
+
+/* Loading states */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 60px;
+    }
+    
+    .sidebar .panel-content {
+        display: none;
+    }
+    
+    .resource-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .search-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .search-wrapper input {
+        width: 100%;
+    }
+}
+
+/* Tooltip for resource types */
+.xp-card[data-type]::before {
+    content: attr(data-type);
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 9px;
+    font-weight: bold;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+.xp-card[data-type="pdf"]::before {
+    background: #D32F2F;
+    color: white;
+}
+
+.xp-card[data-type="link"]::before {
+    background: #1976D2;
+    color: white;
+}
+
+.xp-card[data-type="download"]::before {
+    background: #388E3C;
+    color: white;
+}
+
+.xp-card[data-type="video"]::before {
+    background: #7B1FA2;
+    color: white;
+}

@@ -1,11 +1,15 @@
 {
   "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "DecoratorMetadata": true,
+    "useDefineForClassFields": false,
     "composite": true,
     "declarationMap": true,
     "emitDeclarationOnly": true,
     "importHelpers": true,
     "isolatedModules": true,
-    "lib": ["es2022"],
+    "lib": ["es2022" , "dom"],
     "module": "esnext",
     "moduleResolution": "bundler",
     "noEmitOnError": true,
@@ -16,6 +20,12 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es2022",
-    "customConditions": ["@library/source"]
+    "customConditions": ["@library/source"],
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@404/prisma-schema": ["libs/prisma-schema/src/index.ts"],
+      "@404/prisma-client": ["libs/prisma-client/src/index.ts"]
+    }
   }
 }

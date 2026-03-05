@@ -1,0 +1,219 @@
+generator client {
+    provider = "prisma-client-js"
+    output   = "../../../node_modules/.prisma/client"
+}
+
+datasource db {
+    provider = "postgresql"
+}
+
+enum UserType {
+    ADMIN
+    MOD
+    PUBLIC
+}
+
+model User {
+    id            String    @id @default(uuid()) @db.Uuid
+    username      String    @unique
+    email         String    @unique
+    emailVerified Boolean   @default(false) // might change later idk
+    isDeleted     Boolean   @default(false)
+    isActive      Boolean   @default(true)
+    accounts      Account[]
+    sessions      Session[]
+
+    // audit fields
+    createdAt       DateTime? @default(now())
+    createdBy       User?     @relation("UserCreatedBy", fields: [createdById], references: [id])
+    createdById     String?   @db.Uuid
+    updatedAt       DateTime? @updatedAt
+    updatedBy       User?     @relation("UserUpdatedBy", fields: [updatedById], references: [id])
+    updatedById     String?   @db.Uuid
+    deletedBy       User?     @relation("UserDeletedBy", fields: [deletedById], references: [id])
+    deletedById     String?   @db.Uuid
+    deletedAt       DateTime?
+    activatedAt     DateTime?
+    activatedBy     User?     @relation("UserActivatedBy", fields: [activatedById], references: [id])
+    activatedById   String?   @db.Uuid
+    deactivatedAt   DateTime?
+    deactivatedBy   User?     @relation("UserDeactivatedBy", fields: [deactivatedById], references: [id])
+    deactivatedById String?   @db.Uuid
+
+    //user audit fields 
+    usersCreated     User[] @relation("UserCreatedBy")
+    usersUpdated     User[] @relation("UserUpdatedBy")
+    usersDeleted     User[] @relation("UserDeletedBy")
+    usersActivated   User[] @relation("UserActivatedBy")
+    usersDeactivated User[] @relation("UserDeactivatedBy")
+
+    //roles audit fields if needed
+    rolesCreated     Role[] @relation("RoleCreatedBy")
+    rolesUpdated     Role[] @relation("RoleUpdatedBy")
+    rolesDeleted     Role[] @relation("RoleDeletedBy")
+    rolesActivated   Role[] @relation("RoleActivatedBy")
+    rolesDeactivated Role[] @relation("RoleDeactivatedBy")
+
+    userRoleUserTypes UserRoleUserType[]
+
+    //resources audit fields
+    resourcesCreated     Resource[] @relation("ResourceCreatedBy")
+    resourcesUpdated     Resource[] @relation("ResourceUpdatedBy")
+    resourcesDeleted     Resource[] @relation("ResourceDeletedBy")
+    resourcesActivated   Resource[] @relation("ResourceActivatedBy")
+    resourcesDeactivated Resource[] @relation("ResourceDeactivatedBy")
+
+    //categories audit fields
+    categoriesCreated     Category[] @relation("CategoryCreatedBy")
+    categoriesUpdated     Category[] @relation("CategoryUpdatedBy")
+    categoriesDeleted     Category[] @relation("CategoryDeletedBy")
+    categoriesActivated   Category[] @relation("CategoryActivatedBy")
+    categoriesDeactivated Category[] @relation("CategoryDeactivatedBy")
+
+    @@map("user")
+}
+
+model Role {
+    id            String    @id @default(uuid()) @db.Uuid
+    name          String
+    description   String
+    userType      UserType
+    isActive      Boolean   @default(true)
+    isDeleted     Boolean   @default(false)
+    isAdmin       Boolean   @default(false)
+    deletedAt     DateTime?
+    activatedAt   DateTime?
+    deactivatedAt DateTime?
+    createdAt     DateTime?
+    updatedAt     DateTime?
+    user          Json?     @db.JsonB
+    category      Json?     @db.JsonB
+    resource      Json?     @db.JsonB
+
+    //audit fields
+    createdBy       User?   @relation("RoleCreatedBy", fields: [createdById], references: [id])
+    createdById     String? @db.Uuid
+    updatedBy       User?   @relation("RoleUpdatedBy", fields: [updatedById], references: [id])
+    updatedById     String? @db.Uuid
+    deletedBy       User?   @relation("RoleDeletedBy", fields: [deletedById], references: [id])
+    deletedById     String? @db.Uuid
+    activatedBy     User?   @relation("RoleActivatedBy", fields: [activatedById], references: [id])
+    activatedById   String? @db.Uuid
+    deactivatedBy   User?   @relation("RoleDeactivatedBy", fields: [deactivatedById], references: [id])
+    deactivatedById String? @db.Uuid
+
+    userRoleUserTypes UserRoleUserType[]
+
+    @@map("role")
+}
+
+model Resource {
+    id               String             @id @default(uuid()) @db.Uuid
+    name             String
+    description      String
+    externalResource String
+    createdAt        DateTime           @default(now())
+    updatedAt        DateTime           @updatedAt
+    deletedAt        DateTime?
+    activatedAt      DateTime?
+    deactivatedAt    DateTime?
+    categories       CategoryResource[]
+
+    // audit fields
+    createdBy       User    @relation("ResourceCreatedBy", fields: [createdById], references: [id])
+    createdById     String  @db.Uuid
+    updatedBy       User?   @relation("ResourceUpdatedBy", fields: [updatedById], references: [id])
+    updatedById     String? @db.Uuid
+    deletedBy       User?   @relation("ResourceDeletedBy", fields: [deletedById], references: [id])
+    deletedById     String? @db.Uuid
+    activatedBy     User?   @relation("ResourceActivatedBy", fields: [activatedById], references: [id])
+    activatedById   String? @db.Uuid
+    deactivatedBy   User?   @relation("ResourceDeactivatedBy", fields: [deactivatedById], references: [id])
+    deactivatedById String? @db.Uuid
+
+    @@map("resource")
+}
+
+model Category {
+    id            String             @id @default(uuid()) @db.Uuid
+    name          String             @unique
+    description   String
+    isActive      Boolean            @default(true)
+    isDeleted     Boolean            @default(false)
+    createdAt     DateTime           @default(now())
+    updatedAt     DateTime           @updatedAt
+    deletedAt     DateTime?
+    activatedAt   DateTime?
+    deactivatedAt DateTime?
+    resources     CategoryResource[]
+
+    //audit fields
+    createdBy       User    @relation("CategoryCreatedBy", fields: [createdById], references: [id])
+    createdById     String  @db.Uuid
+    updatedBy       User?   @relation("CategoryUpdatedBy", fields: [updatedById], references: [id])
+    updatedById     String? @db.Uuid
+    deletedBy       User?   @relation("CategoryDeletedBy", fields: [deletedById], references: [id])
+    deletedById     String? @db.Uuid
+    activatedBy     User?   @relation("CategoryActivatedBy", fields: [activatedById], references: [id])
+    activatedById   String? @db.Uuid
+    deactivatedBy   User?   @relation("CategoryDeactivatedBy", fields: [deactivatedById], references: [id])
+    deactivatedById String? @db.Uuid
+
+    @@map("category")
+}
+
+model CategoryResource {
+    id         String    @id @default(uuid()) @db.Uuid
+    category   Category? @relation(fields: [categoryId], references: [id])
+    categoryId String?   @db.Uuid
+    resource   Resource? @relation(fields: [resourceId], references: [id])
+    resourceId String?   @db.Uuid
+
+    @@unique([categoryId, resourceId])
+    @@map("categoryResource")
+}
+
+model UserRoleUserType {
+    id       String    @id @default(uuid()) @db.Uuid
+    userType UserType?
+    role     Role?     @relation(fields: [roleId], references: [id])
+    roleId   String?   @db.Uuid
+    user     User      @relation(fields: [userId], references: [id])
+    userId   String    @db.Uuid
+
+    @@unique([userId, userType])
+    @@map("userroleusertype")
+}
+
+model Session {
+    id        String   @id @default(uuid()) @db.Uuid
+    expiresAt DateTime
+    token     String
+    createdAt DateTime
+    updatedAt DateTime
+    ipAddress String?
+    userAgent String?
+    userId    String   @db.Uuid
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@unique([token])
+    @@map("session")
+}
+
+model Account {
+    id                    String    @id @default(uuid()) @db.Uuid
+    accountId             String
+    userId                String    @db.Uuid
+    user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+    accessToken           String?
+    refreshToken          String?
+    idToken               String?
+    accessTokenExpiresAt  DateTime?
+    refreshTokenExpiresAt DateTime?
+    scope                 String?
+    password              String?
+    createdAt             DateTime
+    updatedAt             DateTime
+
+    @@map("account")
+}

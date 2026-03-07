@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@404-library/dto": ["libs/dto/src/index.ts"],
+      "@404/prisma-client": ["libs/prisma-client/src/index.ts"],
+      "@404/prisma-schema": ["libs/prisma-schema/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

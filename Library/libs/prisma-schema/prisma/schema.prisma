@@ -1,0 +1,156 @@
+generator client {
+    provider = "prisma-client-js"
+    output   = "../../../node_modules/.prisma/client"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+enum UserType {
+    ADMIN
+    MODERATOR
+    USER
+}
+
+enum ResourceType {
+    LINK
+    VIDEO
+    IMAGE
+    // add more if necessary
+}
+
+model User {
+    id                 String    @id @default(cuid()) @db.Uuid
+    name               String
+    email              String
+    emailVerified      Boolean
+    formerEmail        String?
+    image              String?
+    userType           UserType  @default(USER)
+    isDeleted          Boolean   @default(false)
+    isActive           Boolean   @default(true)
+    mustChangePassword Boolean   @default(false)
+    sessions           Session[]
+    accounts           Account[]
+
+    // audit fields
+    createdBy String?
+    updatedBy String?
+    deletedBy String?
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    deletedAt DateTime?
+
+    @@unique([email])
+    @@map("user")
+}
+
+model Session {
+    id        String   @id @default(uuid()) @db.Uuid
+    expiresAt DateTime
+    token     String
+    createdAt DateTime
+    updatedAt DateTime
+    ipAddress String?
+    userAgent String?
+    userId    String   @db.Uuid
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@unique([token])
+    @@map("session")
+}
+
+model Account {
+    id                    String    @id @default(uuid()) @db.Uuid
+    accountId             String
+    providerId            String
+    userId                String    @db.Uuid
+    user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+    accessToken           String?
+    refreshToken          String?
+    idToken               String?
+    accessTokenExpiresAt  DateTime?
+    refreshTokenExpiresAt DateTime?
+    scope                 String?
+    password              String?
+    createdAt             DateTime
+    updatedAt             DateTime
+
+    @@map("account")
+}
+
+model Resource {
+    id          String       @id @default(cuid()) @db.Uuid
+    name        String
+    description String?
+    url         String
+    icon        String?
+    isDeleted   Boolean      @default(false)
+    isActive    Boolean      @default(true)
+    tags        String[]
+    type        ResourceType @default(LINK)
+
+    // audit fields
+    createdBy String?
+    updatedBy String?
+    deletedBy String?
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    deletedAt DateTime?
+
+    @@unique([url])
+    @@map("resource")
+}
+
+model Category {
+    id          String  @id @default(cuid()) @db.Uuid
+    name        String
+    description String?
+    slug        String
+    isDeleted   Boolean @default(false)
+    isActive    Boolean @default(true)
+
+    // audit fields
+    createdBy String?
+    updatedBy String?
+    deletedBy String?
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    deletedAt DateTime?
+
+    @@unique([slug])
+    @@map("category")
+}
+
+model Role {
+    id          String  @id @default(cuid()) @db.Uuid
+    name        String
+    description String?
+    isDeleted   Boolean @default(false)
+    isActive    Boolean @default(true)
+    resource    Json?   @db.Jsonb
+    category    Json?   @db.Jsonb
+    user        Json?   @db.Jsonb
+
+    // audit fields
+    createdBy         String?
+    updatedBy         String?
+    deletedBy         String?
+    createdAt         DateTime           @default(now())
+    updatedAt         DateTime           @updatedAt
+    deletedAt         DateTime?
+    userRoleUserTypes UserRoleUserType[]
+}
+
+model UserRoleUserType {
+    id       String    @id @default(cuid()) @db.Uuid
+    userType UserType?
+    role     Role?     @relation(fields: [roleId], references: [id])
+    roleId   String?   @db.Uuid
+    userId   String?   @db.Uuid
+
+    @@unique([userId, userType])
+    @@map("userroleusertype")
+}

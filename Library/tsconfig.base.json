@@ -1,31 +1,20 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
-    "experimentalDecorators": true,
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
     "emitDecoratorMetadata": true,
-    "DecoratorMetadata": true,
-    "useDefineForClassFields": false,
-    "composite": true,
-    "declarationMap": true,
-    "emitDeclarationOnly": true,
+    "experimentalDecorators": true,
     "importHelpers": true,
-    "isolatedModules": true,
-    "lib": ["es2022" , "dom"],
+    "target": "es2015",
     "module": "esnext",
-    "moduleResolution": "bundler",
-    "noEmitOnError": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitOverride": true,
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
+    "lib": ["es2020", "dom"],
     "skipLibCheck": true,
-    "strict": true,
-    "target": "es2022",
-    "customConditions": ["@library/source"],
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {
-      "@404/prisma-schema": ["libs/prisma-schema/src/index.ts"],
-      "@404/prisma-client": ["libs/prisma-client/src/index.ts"]
-    }
-  }
+    "paths": {}
+  },
+  "exclude": ["node_modules", "tmp"]
 }

@@ -4,18 +4,24 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Debug @library/backEnd with Nx",
+      "name": "Debug back with Nx",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["nx", "serve", "@library/backEnd"],
+      "runtimeArgs": [
+        "nx",
+        "serve",
+        "back"
+      ],
       "env": {
         "NODE_OPTIONS": "--inspect=9229"
       },
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
-      "skipFiles": ["<node_internals>/**"],
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
       "sourceMaps": true,
       "outFiles": [
-        "${workspaceFolder}/apps/backEnd/dist/**/*.(m|c|)js",
+        "${workspaceFolder}/apps/back/dist/**/*.(m|c|)js",
         "!**/node_modules/**"
       ]
     }

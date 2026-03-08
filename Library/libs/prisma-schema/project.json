@@ -5,14 +5,28 @@
   "projectType": "library",
   "tags": [],
   "targets": {
-    "build": {
-      "executor": "@nx/js:tsc",
-      "outputs": ["{options.outputPath}"],
+    "prisma": {
+      "command": "prisma",
       "options": {
-        "outputPath": "dist/libs/prisma-schema",
-        "main": "libs/prisma-schema/src/index.ts",
-        "tsConfig": "libs/prisma-schema/tsconfig.lib.json",
-        "assets": ["libs/prisma-schema/*.md"]
+        "cwd": "libs/prisma-schema"
+      }
+    },
+    "migrate": {
+      "command": "prisma migrate dev",
+      "options": {
+        "cwd": "libs/prisma-schema"
+      }
+    },
+    "generate-types": {
+      "command": "prisma generate",
+      "options": {
+        "cwd": "libs/prisma-schema"
+      }
+    },
+    "format": {
+      "command": "prisma format",
+      "options": {
+        "cwd": "libs/prisma-schema"
       }
     }
   }

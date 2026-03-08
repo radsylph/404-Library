@@ -3,16 +3,32 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
+    "generate-client": "npx nx run prisma-schema:generate-types",
     "back": "npx nx serve back",
-    "front": "npx nx serve front"
+    "front": "npx nx serve front",
+    "seed:dev": "DOTENV_CONFIG_PATH=.env pnpm nx run prisma-schema:prisma db seed",
+    "prisma:format": "npx nx run prisma-schema:prisma format",
+    "prisma:reset":"npx nx run prisma-schema:prisma migrate reset",
+    "prisma:studio":"npx nx run prisma-schema:prisma studio",
+    "create-migration": "npx nx run prisma-schema:migrate dev -- --create-only",
+    "postcreate-migration": "npm run generate-client",
+    "apply-migration": "npx nx run prisma-schema:migrate deploy",
+    "postapply-migration": "npm run generate-client"
+  },
+
+  "prisma": {
+    "seed": "node libs/prisma-schema/seed.js"
   },
   "private": true,
   "dependencies": {
+    "@better-auth/prisma-adapter": "^1.5.4",
     "@nestjs/common": "^11.0.0",
     "@nestjs/core": "^11.0.0",
     "@nestjs/platform-express": "^11.0.0",
     "@nestjs/swagger": "^11.2.6",
     "axios": "^1.6.0",
+    "better-auth": "^1.5.4",
+    "dotenv": "^17.3.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "reflect-metadata": "^0.1.13",
@@ -37,6 +53,8 @@
     "@nx/webpack": "22.5.4",
     "@nx/workspace": "22.5.4",
     "@playwright/test": "^1.36.0",
+    "@prisma/adapter-pg": "^7.4.2",
+    "@prisma/client": "^7.4.2",
     "@swc-node/register": "~1.11.1",
     "@swc/cli": "~0.8.0",
     "@swc/core": "~1.15.5",
@@ -65,8 +83,10 @@
     "jsdom": "~22.1.0",
     "jsonc-eslint-parser": "^2.1.0",
     "nx": "22.5.4",
+    "pg": "^8.20.0",
     "postcss": "8.4.38",
     "prettier": "~3.6.2",
+    "prisma": "^7.4.2",
     "tailwindcss": "3.4.3",
     "ts-jest": "^29.4.0",
     "ts-node": "10.9.1",
